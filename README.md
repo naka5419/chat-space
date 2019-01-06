@@ -22,7 +22,7 @@
 |user_id|integer|null: false, foreign_key: true|
 
 
-## udsersテーブル
+## usersテーブル
 
 |Column|Type|Options|
 |------|----|-------|
