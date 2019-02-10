@@ -1,0 +1,96 @@
+.outer
+  .side_bar
+    .header
+      %h3.header__title
+        USER-NAME
+      %ul.header__lists
+        %li.list
+          =link_to do
+            %i.fa.fa-pencil-square-o.icon
+        %li.list
+          =link_to do
+            %i.fa.fa-cog.icon
+
+
+    .contents
+      .content
+        .content__name
+          GROUPE-NAME
+        .content__message
+          NEW MESSAGE
+
+      .content
+        .content__name
+          GROUPE-NAME
+        .content__message
+          NEW MESSAGE
+
+      .content
+        .content__name
+          GROUPE-NAME
+        .content__message
+          NEW MESSAGE
+
+
+  .main
+    .header
+      .left-header
+        .left-header__title
+          GROUP-NAME
+
+        %ul.left-header__members
+          Menbers:
+          %li.member
+            USER-NAME
+          %li.member
+            USER-NAME
+
+      .right-header
+        %a.right-header__button{href: ''} Edit
+
+
+    .contents
+      .content
+        .up-content
+          .up-content__user-name
+            USER-NAME
+          .up-content__date
+            2019/02/03 12:12:12
+        .low-content
+          .low-content__message
+            MESSAGE
+
+      .content
+        .up-content
+          .up-content__user-name
+            USER-NAME
+          .up-content__date
+            2019/02/03 12:12:12
+        .low-content
+          .low-content__message
+            MESSAGE
+
+      .content
+        .up-content
+          .up-content__user-name
+            USER-NAME
+          .up-content__date
+            2019/02/03 12:12:12
+        .low-content
+          .low-content__message
+            MESSAGE
+
+    .footer
+      %form
+        %input.footer__message{placeholder: "type a message"}
+          .footer__message__cell
+            %label.footer__message__cell__icon
+              %input.hidden{type: "file"}
+              %i.fa.fa-image
+
+        %input.footer__submit{type: "submit" ,value: "Send" }
+
+
+
+
+
