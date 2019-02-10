@@ -1,0 +1,123 @@
+.main {
+  width: calc(100vw - 300px);
+
+  .header {
+    box-sizing: border-box;
+    height: 100px;
+    padding: 0 40px;
+    border: 1px solid $main_white;
+    background-color: white;
+
+    .left-header {
+      margin-top: 30px;
+      float: left;
+
+      &__title {
+        font-size: 20px;
+        color: $main_black;
+      }
+
+      &__members {
+        font-size: $s12_font;
+        color: $gray;
+        display: flex;
+        margin-top: 15px;
+        .member {
+      	  display: inline-block;
+          padding-right: 5px;
+        }
+      }
+    }
+
+    .right-header {
+
+      &__button {
+        float:  right;
+        border: 1px solid $light_blue;
+        color: $light_blue;
+        height: 40px;
+        line-height: 40px;
+        margin-top: 28px;
+        padding: 0 20px;
+      }
+    }
+  }
+
+  .contents {
+    background-color: #F7F7F7;
+    box-sizing: border-box;
+    padding: 46px 40px 0;
+    height: calc(100vh - 100px - 90px);
+
+    .content {
+      .up-content {
+        display: flex;
+        &__user-name {
+          color: $black_blue;
+          font-size: $s16_font;
+          font-weight: bold;
+        }
+        &__date {
+          padding-left: 10px;
+          color: $gray;
+          font-size: $s12_font;
+        }
+      }
+
+      .low-content {
+        margin-top: 10px;
+        &__message {
+          color: $black_blue;
+          font-size: 14px;
+          margin-bottom: 40px;
+        }
+      }
+    }
+  }
+
+  .footer {
+    background-color: #dddddd;
+    box-sizing: border-box;
+    height: 90px;
+    padding: 20px 40px 20px 50px;
+    position: relative;
+
+    &__message {
+      position: relative;
+      border: none;
+      float: left;
+      height: 50px;
+      width: calc(100% - 150px);
+
+      &__cell {
+        background-color: $side_white;
+        float: left;
+        height: 50px;
+        padding-right: 10px;
+
+        &__icon {
+          font-size: $s16_font;
+          line-height: 50px;
+          margin-left: 5px;
+
+          .hidden {
+            display: none;
+          }
+        }
+      }
+    }
+
+
+    &__submit {
+      background-color: $light_blue;
+      border: none;
+      color: $side_white;
+      float: right;
+      font-size: $s16_font;
+      height: 50px;
+      margin-left: 15px;
+      padding: 0 30px;
+    }
+  }
+}
+
