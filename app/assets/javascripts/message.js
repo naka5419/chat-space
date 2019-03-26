@@ -16,7 +16,6 @@ $(function() {
 
   function buildHTML1(message) {
     var html1 = `
-    <div class='content'>
       <div class='up-content'>
         <div class='up-content__user-name'>
           ${ message.user_name }
@@ -24,35 +23,39 @@ $(function() {
         <div class='up-content__date'>
           ${ createDate }
         </div>
-      </div>
-    </div>`
+      </div>`
     return html1
   }
 
   function buildHTML2(message) {
     var html2 = `
-    <div class='content'>
       <div class='low-content'>
         <p class="low-content__message">
           ${ message.content }
         </p>
-      </div>
-    </div>`
+      </div>`
     return html2
   }
 
   function buildHTML3(message) {
     var html3 = `
-    <div class='content'>
       <div class='low-content'>
         <p class="low-content__image">
           <img src="${ message.image.url } ">
         </p>
-      </div>
-    </div>`
+      </div>`
     return html3
   }
 
+  function buildHTML(html1,html2,html3) {
+    var html =
+      '<div class="content">' +
+        'html1' +
+        'html2' +
+        'html3' +
+      '</div>'
+    return html
+  }
 
   $('#new_message').on('submit', function(e) {
     e.preventDefault();
@@ -72,16 +75,23 @@ $(function() {
     .done(function(data) {
       createDate = buildDate(data.created_at);
       var html1 = buildHTML1(data);
-      if (data.content){
-        var html2 = buildHTML2(data);
+
+      if ((data.content) && (data.image.url)){
+        var html = buildHTML1(data) + buildHTML2(data) + buildHTML3(data)
       }
-      if (data.image.url){
-        var html3 = buildHTML3(data);
+      else if (data.content){
+        var html =  buildHTML1(data) + buildHTML2(data)
+      }
+      else if (data.image.url){
+        var html = buildHTML1(data) + buildHTML3(data)
       }
 
-      $('.contents').append(html1);
-      $('.contents').append(html2);
-      $('.contents').append(html3);
+      var html =
+        '<div class="content">' +
+          html +
+        '</div>';
+
+      $('.contents').append(html);
 
       $this.get(0).reset();
 
