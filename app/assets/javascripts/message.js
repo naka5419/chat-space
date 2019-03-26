@@ -1,19 +1,5 @@
 $(function() {
 
-  function buildDate(date_data) {
-    var baseYear = date_data.substr(0,4);
-    var baseMonth = date_data.substr(5,2);
-    var baseDay = date_data.substr(8,2);
-    var baseHour = date_data.substr(11,2);
-    var baseMin = date_data.substr(14,2);
-
-    var numBaseHour = +baseHour
-    var jpBaseHour = String(numBaseHour + 9)
-    var changeDate = baseYear + "/" + baseMonth + "/" + baseDay + " " + jpBaseHour + ":" + baseMin;
-
-    return changeDate
-  }
-
   function buildHTML1(message) {
     var html1 = `
       <div class='up-content'>
@@ -21,7 +7,7 @@ $(function() {
           ${ message.user_name }
         </div>
         <div class='up-content__date'>
-          ${ createDate }
+          ${ message.created_at }
         </div>
       </div>`
     return html1
@@ -47,16 +33,6 @@ $(function() {
     return html3
   }
 
-  function buildHTML(html1,html2,html3) {
-    var html =
-      '<div class="content">' +
-        'html1' +
-        'html2' +
-        'html3' +
-      '</div>'
-    return html
-  }
-
   $('#new_message').on('submit', function(e) {
     e.preventDefault();
     var form = $('#new_message');
@@ -73,9 +49,7 @@ $(function() {
     })
 
     .done(function(data) {
-      createDate = buildDate(data.created_at);
       var html1 = buildHTML1(data);
-
       if ((data.content) && (data.image.url)){
         var html = buildHTML1(data) + buildHTML2(data) + buildHTML3(data)
       }

@@ -19,5 +19,6 @@ module ChatSpace
     # -- all .rb files in that directory are automatically loaded.
     config.i18n.default_locale = :ja
     # config.action_view.automatically_disable_submit_tag = false # この行を追加
+    config.time_zone = 'Tokyo'
   end
 end
