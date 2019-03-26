@@ -1,96 +1,37 @@
 .outer
-  .side_bar
-    .header
-      %h3.header__title
-        USER-NAME
-      %ul.header__lists
-        %li.list
-          =link_to do
-            %i.fa.fa-pencil-square-o.icon
-        %li.list
-          =link_to do
-            %i.fa.fa-cog.icon
 
-
-    .contents
-      .content
-        .content__name
-          GROUPE-NAME
-        .content__message
-          NEW MESSAGE
-
-      .content
-        .content__name
-          GROUPE-NAME
-        .content__message
-          NEW MESSAGE
-
-      .content
-        .content__name
-          GROUPE-NAME
-        .content__message
-          NEW MESSAGE
-
+  = render 'shared/side_bar'
 
   .main
     .header
       .left-header
+
         .left-header__title
-          GROUP-NAME
+          = @group.name
 
         %ul.left-header__members
-          Menbers:
-          %li.member
-            USER-NAME
-          %li.member
-            USER-NAME
+          MEMBERS :
+          - @group.users.each do |user|
+            %li.member
+              = user.name
 
       .right-header
-        %a.right-header__button{href: ''} Edit
+        %a.right-header__button{href: 'edit'} Edit
 
 
     .contents
-      .content
-        .up-content
-          .up-content__user-name
-            USER-NAME
-          .up-content__date
-            2019/02/03 12:12:12
-        .low-content
-          .low-content__message
-            MESSAGE
-
-      .content
-        .up-content
-          .up-content__user-name
-            USER-NAME
-          .up-content__date
-            2019/02/03 12:12:12
-        .low-content
-          .low-content__message
-            MESSAGE
-
-      .content
-        .up-content
-          .up-content__user-name
-            USER-NAME
-          .up-content__date
-            2019/02/03 12:12:12
-        .low-content
-          .low-content__message
-            MESSAGE
+      = render @messages
+      //= render partial: 'message', collection: @messages
 
     .footer
-      %form
-        %input.footer__message{placeholder: "type a message"}
-          .footer__message__cell
-            %label.footer__message__cell__icon
-              %input.hidden{type: "file"}
-              %i.fa.fa-image
+      = form_for [@group, @message] do |f|
 
-        %input.footer__submit{type: "submit" ,value: "Send" }
+        = f.text_field :content, class: 'footer__message', placeholder: 'type a message'
 
+        .footer__cell
+          = f.label :image, class: 'footer__cell__image' do
+            %i.fa.fa-image
+              = f.file_field :image, class: 'hidden'
 
-
-
+        = f.submit "Send", class: 'footer__submit'
 
