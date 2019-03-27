@@ -1,53 +1,58 @@
 .main {
+  position: relative;
   width: calc(100vw - 300px);
-
   .header {
     box-sizing: border-box;
     height: 100px;
     padding: 0 40px;
-    border: 1px solid $main_white;
-    background-color: white;
 
     .left-header {
-      margin-top: 30px;
       float: left;
 
       &__title {
         font-size: 20px;
         color: $main_black;
+        margin-top: 35px;
       }
 
       &__members {
+        display: flex;
         font-size: $s12_font;
         color: $gray;
-        display: flex;
         margin-top: 15px;
         .member {
       	  display: inline-block;
+          padding-left: 5px;
           padding-right: 5px;
         }
       }
     }
 
     .right-header {
+      float:  right;
+      border: 1px solid $light_blue;
+      color: $light_blue;
+      height: 40px;
+      line-height: 40px;
+      margin-top: 28px;
+      padding: 0 20px;
 
       &__button {
-        float:  right;
-        border: 1px solid $light_blue;
         color: $light_blue;
-        height: 40px;
-        line-height: 40px;
-        margin-top: 28px;
-        padding: 0 20px;
+        text-decoration: none;
       }
     }
   }
 
   .contents {
+    position: absolute;
+    width: calc(100vw - 300px);
     background-color: #F7F7F7;
     box-sizing: border-box;
     padding: 46px 40px 0;
-    height: calc(100vh - 100px - 90px);
+    height: calc(100% - 100px - 90px);
+    overflow: auto;
+
 
     .content {
       .up-content {
@@ -76,37 +81,34 @@
   }
 
   .footer {
+    position: fixed;
+    width: calc(100vw - 300px);
+    bottom: 0px;
+    left: 300px;
     background-color: #dddddd;
     box-sizing: border-box;
     height: 90px;
     padding: 20px 40px 20px 50px;
-    position: relative;
 
     &__message {
-      position: relative;
       border: none;
       float: left;
       height: 50px;
       width: calc(100% - 150px);
-
-      &__cell {
-        background-color: $side_white;
-        float: left;
-        height: 50px;
-        padding-right: 10px;
-
-        &__icon {
-          font-size: $s16_font;
-          line-height: 50px;
-          margin-left: 5px;
-
-          .hidden {
-            display: none;
-          }
-        }
+    }
+    &__cell {
+      background-color: $side_white;
+      float: left;
+      height: 50px;
+      padding-right: 10px;
+      &__image {
+        font-size: $s16_font;
+        line-height: 50px;
+      }
+      .hidden {
+        display: none;
       }
     }
-
 
     &__submit {
       background-color: $light_blue;

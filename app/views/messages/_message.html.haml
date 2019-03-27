@@ -1,0 +1,12 @@
+.content
+  .up-content
+    .up-content__user-name
+      = message.user.name
+    .up-content__date
+      //= message.created_at.strftime("%Y/%m/%d %H:%M")
+      = l message.created_at, format: :long
+  .low-content
+    - if message.content.present?
+      %p.low-content__message
+        = message.content
+    = image_tag message.image.url, class: 'low-content__image' if message.image.present?

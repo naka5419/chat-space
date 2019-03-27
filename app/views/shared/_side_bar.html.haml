@@ -1,0 +1,22 @@
+.side_bar
+  .header
+    %h3.header__title
+      = current_user.name
+    %ul.header__lists
+      %li.list
+        =link_to new_group_path do
+          %i.fa.fa-pencil-square-o.icon
+      %li.list
+        =link_to edit_user_path(current_user) do
+          %i.fa.fa-cog.icon
+
+  .side-contents
+    - current_user.groups.each do |group|
+      .side-content
+        = link_to group_messages_path(group) do
+          .side-content__name
+            = group.name
+          .side-content__message
+            = group.show_last_message
+
+
