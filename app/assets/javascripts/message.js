@@ -1,6 +1,6 @@
 $(function() {
 
-  function buildHTML1(message) {
+  function nameDateHtml(message) {
     var html1 = `
       <div class='up-content'>
         <div class='up-content__user-name'>
@@ -13,7 +13,7 @@ $(function() {
     return html1
   }
 
-  function buildHTML2(message) {
+  function messageHtml(message) {
     var html2 = `
       <div class='low-content'>
         <p class="low-content__message">
@@ -23,7 +23,7 @@ $(function() {
     return html2
   }
 
-  function buildHTML3(message) {
+  function imageHtml(message) {
     var html3 = `
       <div class='low-content'>
         <p class="low-content__image">
@@ -49,15 +49,15 @@ $(function() {
     })
 
     .done(function(data) {
-      var html1 = buildHTML1(data);
+      var html1 = nameDateHtml(data);
       if ((data.content) && (data.image.url)){
-        var html = buildHTML1(data) + buildHTML2(data) + buildHTML3(data)
+        var html = nameDateHtml(data) + messageHtml(data) + imageHtml(data)
       }
       else if (data.content){
-        var html =  buildHTML1(data) + buildHTML2(data)
+        var html =  nameDateHtml(data) + messageHtml(data)
       }
       else if (data.image.url){
-        var html = buildHTML1(data) + buildHTML3(data)
+        var html = nameDateHtml(data) + imageHtml(data)
       }
 
       var html =
