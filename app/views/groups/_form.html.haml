@@ -14,7 +14,7 @@
 
   .chat-group-form__field.clearfix
     .chat-group-form__field--left
-      = f.label :チャットメンバーを追加, class: 'chat-group-form__label'
+      %p.chat-group-form__label チャットメンバーを追加
 
     .chat-group-form__field--right
       .chat-group-form__search.clearfix
@@ -23,7 +23,9 @@
 
   .chat-group-form__field.clearfix
     .chat-group-form__field--left
-      %label.chat-group-form__label{:for => "chat_group_チャットメンバー"} チャットメンバー
+
+      %p.chat-group-form__label チャットメンバー
+
     .chat-group-form__field--right
       #chat-group-users
         - group.users.each do |user|
@@ -39,17 +41,3 @@
     .chat-group-form__field--left
     .chat-group-form__field--right
       = f.submit class: 'chat-group-form__action-btn',value:'登録する'
-
-
-
-
-
-
-
-
-
-
-
-
-
-
