@@ -1,37 +1,85 @@
 $(function() {
 
-  function nameDateHtml(message) {
-    var html1 = `
-      <div class='up-content'>
-        <div class='up-content__user-name'>
-          ${ message.user_name }
-        </div>
-        <div class='up-content__date'>
-          ${ message.created_at }
-        </div>
-      </div>`
-    return html1
-  }
+  var buildMessageHTML = function(message) {
+    if (message.content && message.image.url) {
+      var html = '<div class="content" data-message-id=' + message.id + '>' +
+        '<div class="up-content">' +
+          '<div class="up-content__user-name">' +
+            message.user_name +
+          '</div>' +
+          '<div class="up-content__date">' +
+            message.created_at +
+          '</div>' +
+        '</div>' +
+        '<div class="low-content">' +
+          '<p class="low-content__message">' +
+            message.content +
+          '</p>' +
+          '<img src="' + message.image.url + '" class="low-content__image" >' +
+        '</div>' +
+      '</div>'
+    } else if (message.content) {
+      var html = '<div class="content" data-message-id=' + message.id + '>' +
+        '<div class="up-content">' +
+          '<div class="up-content__user-name">' +
+            message.user_name +
+          '</div>' +
+          '<div class="up-content__date">' +
+            message.created_at +
+          '</div>' +
+        '</div>' +
+        '<div class="low-content">' +
+          '<p class="low-content__message">' +
+            message.content +
+          '</p>' +
+        '</div>' +
+      '</div>'
+    } else if (message.image.url) {
+      var html = '<div class="content" data-message-id=' + message.id + '>' +
+        '<div class="up-content">' +
+          '<div class="up-content__user-name">' +
+            message.user_name +
+          '</div>' +
+          '<div class="up-content__date">' +
+            message.created_at +
+          '</div>' +
+        '</div>' +
+        '<div class="low-content">' +
+          '<img src="' + message.image.url + '" class="low-content__image" >' +
+        '</div>' +
+      '</div>'
+    };
+    return html;
+  };
 
-  function messageHtml(message) {
-    var html2 = `
-      <div class='low-content'>
-        <p class="low-content__message">
-          ${ message.content }
-        </p>
-      </div>`
-    return html2
-  }
+  var reloadMessages = function() {
+    var last_message_id = $('.content:last').data('messageId');
+    $.ajax({
+      url: "/groups/:id/api/messages",
+      type: 'get',
+      dataType: 'json',
+      data: {id: last_message_id}
+    })
 
-  function imageHtml(message) {
-    var html3 = `
-      <div class='low-content'>
-        <p class="low-content__image">
-          <img src="${ message.image.url } ">
-        </p>
-      </div>`
-    return html3
-  }
+    .done(function(messages){
+      if (messages.length != 0){
+        var insertHTML = '';
+        messages.forEach(function(message){
+          insertHTML +=  buildMessageHTML(message);
+          $('.contents').append(insertHTML);
+
+          $('.contents').animate({
+          scrollTop: $('.contents').prop('scrollHeight')
+          }, 500);
+        });
+
+      };
+    })
+    .fail(function() {
+      console.log('error');
+    });
+
+  };
 
   $('#new_message').on('submit', function(e) {
     e.preventDefault();
@@ -49,31 +97,14 @@ $(function() {
     })
 
     .done(function(data) {
-      var html1 = nameDateHtml(data);
-      if ((data.content) && (data.image.url)){
-        var html = nameDateHtml(data) + messageHtml(data) + imageHtml(data)
-      }
-      else if (data.content){
-        var html =  nameDateHtml(data) + messageHtml(data)
-      }
-      else if (data.image.url){
-        var html = nameDateHtml(data) + imageHtml(data)
-      }
-
-      var html =
-        '<div class="content">' +
-          html +
-        '</div>';
-
-      $('.contents').append(html);
-
+      var messageHTML = buildMessageHTML(data);
+      $('.contents').append(messageHTML);
       $this.get(0).reset();
 
       $('.contents').animate({
          scrollTop: $('.contents').prop('scrollHeight')
       }, 500);
     })
-
 
     .fail(function() {
       alert('非同期通信に失敗しました');
@@ -82,9 +113,8 @@ $(function() {
     .always(function() {
     $(".footer__submit").prop("disabled", false);
     });
-  });
+
+  })
+  setInterval(reloadMessages, 5000);
+
 });
-
-
-
-

@@ -1,4 +1,5 @@
-.content
+.content{'data-message-id': message.id}
+  /.content(data-message-id = message.id)
   .up-content
     .up-content__user-name
       = message.user.name
@@ -7,6 +8,7 @@
       = l message.created_at, format: :long
   .low-content
     - if message.content.present?
+      /%p.low-content__message { data-message-id = 'message.id'}
       %p.low-content__message
         = message.content
     = image_tag message.image.url, class: 'low-content__image' if message.image.present?
