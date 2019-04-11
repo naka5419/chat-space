@@ -54,8 +54,11 @@ $(function() {
 
   var reloadMessages = function() {
     var last_message_id = $('.content:last').data('messageId');
+    var urlStr = location.pathname;
+    newUrlStr = urlStr.replace(/messages/, 'api/messages');
+
     $.ajax({
-      url: "/groups/:id/api/messages",
+      url:  newUrlStr ,
       type: 'get',
       dataType: 'json',
       data: {id: last_message_id}
@@ -65,7 +68,7 @@ $(function() {
       if (messages.length != 0){
         var insertHTML = '';
         messages.forEach(function(message){
-          insertHTML +=  buildMessageHTML(message);
+           insertHTML +=  buildMessageHTML(message);
           $('.contents').append(insertHTML);
 
           $('.contents').animate({
