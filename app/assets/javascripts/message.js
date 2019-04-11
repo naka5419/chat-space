@@ -68,7 +68,7 @@ $(function() {
       if (messages.length != 0){
         var insertHTML = '';
         messages.forEach(function(message){
-           insertHTML +=  buildMessageHTML(message);
+          insertHTML +=  buildMessageHTML(message);
           $('.contents').append(insertHTML);
 
           $('.contents').animate({
